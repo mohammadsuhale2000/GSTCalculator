@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calculator, IndianRupee, Percent } from 'lucide-react'
+import { Calculator, IndianRupee, Package } from 'lucide-react'
 import './App.css'
 
 export default function App() {
   const [totalAmount, setTotalAmount] = useState('')
   const [ratePerItem, setRatePerItem] = useState('')
-  const [gstRate, setGstRate] = useState('18')
+  const gstRate = 18
 
   const amountIncludingGST = parseFloat(totalAmount) || 0
-  const gstRateDecimal = parseFloat(gstRate) || 0
-  const amountExcludingGST = amountIncludingGST / (1 + gstRateDecimal / 100)
+  const amountExcludingGST = amountIncludingGST / (1 + gstRate / 100)
   const allGST = amountIncludingGST - amountExcludingGST
   const cgst = allGST / 2
   const sgst = allGST / 2
+  const rateValue = parseFloat(ratePerItem) || 0
+  const quantity = rateValue > 0 ? amountExcludingGST / rateValue : 0
 
   const formatCurrency = (value) => {
     return `₹${value.toFixed(2)}`
@@ -84,19 +85,20 @@ export default function App() {
           </div>
 
           <div className="input-group">
-            <Percent className="input-icon" size={20} />
+            <Package className="input-icon" size={20} />
             <input
-              type="number"
-              id="gstRate"
-              value={gstRate}
-              onChange={(e) => setGstRate(e.target.value)}
+              type="text"
+              id="quantity"
+              value={quantity.toFixed(2)}
+              readOnly
               placeholder=" "
-              className="input-field"
+              className="input-field readonly"
             />
-            <label htmlFor="gstRate" className="floating-label">
-              GST Rate (%)
+            <label htmlFor="quantity" className="floating-label active">
+              Quantity
             </label>
           </div>
+
         </motion.div>
 
         <motion.div className="card results" variants={itemVariants}>

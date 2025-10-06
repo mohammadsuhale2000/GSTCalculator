@@ -96,6 +96,22 @@ body {
   background: linear-gradient(135deg, #fdfbfb 0%, #f7f7f7 100%);
 }
 
+.input-field::-webkit-outer-spin-button,
+.input-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-field[type=number] {
+  -moz-appearance: textfield;
+}
+
+.input-field.readonly {
+  background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+  cursor: not-allowed;
+  color: #666;
+}
+
 .input-field:focus {
   outline: none;
   border-color: #667eea;
@@ -123,6 +139,15 @@ body {
   pointer-events: none;
   transition: all 0.3s ease;
   background: transparent;
+}
+
+.floating-label.active {
+  top: -0.5rem;
+  left: 2.5rem;
+  font-size: 0.75rem;
+  color: #667eea;
+  background: white;
+  padding: 0 0.5rem;
 }
 
 .results {
