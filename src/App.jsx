@@ -86,25 +86,6 @@ export default function App() {
             </label>
           </div>
 
-          {/* Quantity Input */}
-          <div className="input-group">
-            <Package className="input-icon" size={20} />
-            <input
-              type="number"
-              id="quantityInput"
-              value={quantity || ""}
-              onChange={(e) => setTotalAmount("")} // Optional: Prevent user editing
-              placeholder=" "
-              className="input-field"
-              readOnly
-            />
-            <label
-              htmlFor="quantityInput"
-              className={`floating-label ${quantity ? 'active' : ''}`}
-            >
-              Quantity
-            </label>
-          </div>
         </motion.div>
 
         {/* Results Section */}
