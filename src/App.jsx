@@ -53,7 +53,8 @@ export default function App() {
 
         <motion.div className="card" variants={itemVariants}>
           <h2>Input Details</h2>
-          
+
+          {/* Total Amount Input */}
           <div className="input-group">
             <IndianRupee className="input-icon" size={20} />
             <input
@@ -69,6 +70,7 @@ export default function App() {
             </label>
           </div>
 
+          {/* Rate per Item Input */}
           <div className="input-group">
             <IndianRupee className="input-icon" size={20} />
             <input
@@ -84,42 +86,40 @@ export default function App() {
             </label>
           </div>
 
+          {/* Quantity Input */}
           <div className="input-group">
             <Package className="input-icon" size={20} />
             <input
-              type="text"
-              id="quantity"
-              value={quantity.toFixed(2)}
-              readOnly
+              type="number"
+              id="quantityInput"
+              value={quantity || ""}
+              onChange={(e) => setTotalAmount("")} // Optional: Prevent user editing
               placeholder=" "
-              className="input-field readonly"
+              className="input-field"
+              readOnly
             />
-            <label htmlFor="quantity" className="floating-label active">
+            <label
+              htmlFor="quantityInput"
+              className={`floating-label ${quantity ? 'active' : ''}`}
+            >
               Quantity
             </label>
           </div>
-
         </motion.div>
 
+        {/* Results Section */}
         <motion.div className="card results" variants={itemVariants}>
           <h2>Calculated Results</h2>
-          
-          <div className="result-item">
-            <span className="result-label">Amount Including GST</span>
-            <span className="result-value">{formatCurrency(amountIncludingGST)}</span>
+
+          <div className="result-item highlight">
+            <span className="result-label">Quantity</span>
+            <span className="result-value">{quantity.toFixed(2)}</span>
           </div>
 
           <div className="result-item highlight">
             <span className="result-label">Amount Excluding GST</span>
             <span className="result-value">{formatCurrency(amountExcludingGST)}</span>
           </div>
-
-          <div className="result-item highlight">
-            <span className="result-label">All GST</span>
-            <span className="result-value">{formatCurrency(allGST)}</span>
-          </div>
-
-          <div className="divider"></div>
 
           <div className="result-item">
             <span className="result-label">CGST (Central GST)</span>
@@ -130,8 +130,16 @@ export default function App() {
             <span className="result-label">SGST (State GST)</span>
             <span className="result-value">{formatCurrency(sgst)}</span>
           </div>
+
+          <div className="divider"></div>
+
+          <div className="result-item">
+            <span className="result-label">Amount Including GST</span>
+            <span className="result-value">{formatCurrency(amountIncludingGST)}</span>
+          </div>
         </motion.div>
       </motion.div>
+
     </div>
   )
 }
